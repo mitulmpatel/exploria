@@ -1,0 +1,51 @@
+extends ../layout.pug
+
+block content
+  //  header complete 
+  section.properties
+    .banner-main(style='background-image: url(/images/properties/' +property.image +');')
+      .container
+        .banner-content
+          h1=property.name
+    .container
+      .properties-form
+        .left-block
+          div
+            p !{property.description}
+
+          div
+            h3 Amenities
+            .listing
+              ul
+                each amenity in amenities
+                  li=amenity
+        .right-block
+          form(action="/properties/inquiry" method="post"  enctype="application/x-www-form-urlencoded")
+            fieldset
+              legend Request a quote
+              if message
+                .success=message
+              label(for) Name
+              input(type="text",name="name",required="required",value="Mitul")
+              label(for) Email
+              input(type="email",name="email",required="required",value="patel.mitul.m@gmail.com")
+              label(for) Phone
+              input(type="text",name="phone",required="required",value="302-713-4410")
+              label(for) Stay Date
+              input(type="date", name="bookingdate",value="25/03/2022")
+              label(for) Number of guests
+              input(type="number", name="guests",required="required",value=2)
+              label(for) Notes
+              textarea( cols="30" rows="10",name="notes",value="This is my notes")
+              input(type="hidden",name="propertyid",value=property._id)
+              .form-button
+                button(type="submit") Send Request
+      div
+        h2 Nearby Properties
+      .img-section
+        for property in properties
+          .box-img
+            a(href="/properties/" + property._id)
+              img(src="/images/properties/"+property.image)
+            div
+              a(href="/properties/" + property._id)=property.name

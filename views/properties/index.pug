@@ -1,0 +1,28 @@
+extends ../layout.pug
+
+block content
+  //  Featured Properties-start 
+  .banner-main
+    .container
+      .banner-content
+        h1 Properties
+  section.featured-properties
+    .container
+      .featured-content
+        h2
+        .main-box
+          each property in properties
+            .box-img
+              a(href="/properties/" + property._id)
+                img(src="/images/properties/"+property.image)
+              h5
+                a(href="/properties/" + property._id)=property.name
+              .bookmark
+                if arrBookmarkPropsIds.length > 0
+                  if (!arrBookmarkPropsIds.includes(property._id.toString()))
+                    a(href="/user/bookmarks/add/"+property._id+"?_method=POST") Add to bookmark
+                  if (arrBookmarkPropsIds.includes(property._id.toString()))
+                    a(href="/user/bookmarks/delete/"+property._id+"?_method=POST") Remove bookmark
+                else
+                  a(href="/user/bookmarks/add/"+property._id+"?_method=POST") Add to bookmark
+  //  Featured Properties-end 
