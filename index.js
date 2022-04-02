@@ -5,9 +5,10 @@ var methodOverride = require('method-override')
 const app = express();
 const port = 3000;
 
-const mongoDB = "mongodb://localhost:27017/exploria";
+//const mongoDB = "mongodb://localhost:27017/exploria";
 // mongodb+srv://exploria:<password>@cluster0.rj9vf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
+const mongoDB = `mongodb+srv://${process.env.MONGODB_DATABASE}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 const db = mongoose.connection;
