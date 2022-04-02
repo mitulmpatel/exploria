@@ -7,15 +7,12 @@ var router = express.Router();
 router.get('/', async function (req, res) {
   const properties = await PropertiesModel.find({ "featured": "true" }).exec();
 
-  console.log(properties);
-  
   const userBookmarkProperties = await UsersModel.findById('6226b78a7d010d30336384f1').exec();
-  console.log(userBookmarkProperties);
-  //let arrBookmarkProps = userBookmarkProperties.bookmarkpropties;
+  let arrBookmarkProps = userBookmarkProperties.bookmarkpropties;
   let arrBookmarkPropsIds = [];
-  /*arrBookmarkProps.forEach(function (arrayItem) {
+  arrBookmarkProps.forEach(function (arrayItem) {
       arrBookmarkPropsIds.push(arrayItem.property);
-  });*/
+  });
   console.log(arrBookmarkPropsIds);
 
   res.render("index", { properties: properties, arrBookmarkPropsIds: arrBookmarkPropsIds });
